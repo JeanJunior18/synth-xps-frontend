@@ -1,0 +1,20 @@
+services:
+  api:
+    image: jeanjr/synth-xps-api
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URI=mongodb://db:27017/synth-xps
+    restart: always
+    depends_on:
+      - db
+
+  db:
+    image: mongo:latest
+    volumes:
+      - db-data:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  db-data:
